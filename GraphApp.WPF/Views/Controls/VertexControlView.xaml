@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="GraphApp.WPF.Views.Controls.VertexControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:GraphApp.WPF.ViewModels.Controls"
+             xmlns:cb="clr-namespace:CalcBinding;assembly=CalcBinding"
+             mc:Ignorable="d"
+             d:DesignHeight="100" d:DesignWidth="100"
+             d:DataContext="{d:DesignInstance vm:VertexControlViewModel}">
+    <Canvas>
+        <Grid Canvas.Left="{cb:Binding Position.X}"
+              Canvas.Top="{cb:Binding Position.Y}"
+              Height="{ Binding Size }"
+              Width="{ Binding Size }"
+              d:Height="100" d:Width="100">
+            <Ellipse Fill="{ Binding BackgroundColor }"
+                     Stroke="{ Binding BorderColor }"
+                     Width="{ Binding Size }"
+                     Height="{ Binding Size }"
+                     StrokeThickness="{ Binding BorderSize }"
+                     d:Stroke="Black"
+                     d:Fill="White" />
+            <TextBlock Name="TextBlockControl"
+                       Text="{ Binding TextString }"
+                       Foreground="{ Binding TextColor }"
+                       FontSize="{ Binding TextSize }"
+                       FontWeight="{Binding TextWeight}"
+                       FlowDirection="LeftToRight"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Stretch"
+                       TextAlignment="Center"
+                       d:Text="123">
+                <TextBlock.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Name="ConnectToButton"
+                                  Header="Присоединить"
+                                  Click="ConnectToHandler" />
+                        <MenuItem Header="Удалить"
+                                  Click="RemoveVertexHandler" />
+                    </ContextMenu>
+                </TextBlock.ContextMenu>
+            </TextBlock>
+        </Grid>
+    </Canvas>
+</UserControl>

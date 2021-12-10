@@ -1,0 +1,140 @@
+﻿<Window x:Class="GraphApp.WPF.Views.Windows.ComparableAlgorithmsWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vw="clr-namespace:GraphApp.WPF.ViewModels.Windows"
+        mc:Ignorable="d"
+        Title="Сравнение результатов работы алгоритмов" Height="450" Width="695"
+        d:DataContext="{d:DesignInstance vw:ComparableAlgorithmsWindowViewModel}">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Left">
+            <StackPanel DockPanel.Dock="Top">
+                <Border Width="180"
+                        Height="50"
+                        BorderBrush="Black"
+                        BorderThickness="0, 0, 1, 1">
+                    <TextBlock Text="Название алгоритма"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Padding="5" />
+                </Border>
+                <Border Width="180"
+                        Height="30"
+                        BorderBrush="Black"
+                        BorderThickness="0, 0, 1, 1">
+                    <TextBlock Text="Количество вершин"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Padding="5" />
+                </Border>
+                <Border Width="180"
+                        Height="30"
+                        BorderBrush="Black"
+                        BorderThickness="0, 0, 1, 1">
+                    <TextBlock Text="Затраченное время (мс)"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Padding="5" />
+                </Border>
+            </StackPanel>
+            <Border Width="180"
+                    BorderBrush="Black"
+                    BorderThickness="0, 0, 1, 0">
+                <TextBlock Text="Список кратчайших путей между вершинами"
+                           HorizontalAlignment="Center"
+                           TextWrapping="WrapWithOverflow"
+                           Padding="5" />
+            </Border>
+        </DockPanel>
+        <ItemsControl
+            ItemsSource="{Binding Items}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel DockPanel.Dock="Left">
+                        <StackPanel DockPanel.Dock="Top">
+                            <Border Width="250"
+                                    Height="50"
+                                    BorderBrush="Black"
+                                    BorderThickness="0, 0, 1, 1">
+                                <TextBlock Text="{Binding AlgorithmName}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Padding="5" />
+                            </Border>
+                            <Border Width="250"
+                                    Height="30"
+                                    BorderBrush="Black"
+                                    BorderThickness="0, 0, 1, 1">
+                                <TextBlock Text="{Binding CountVertices}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Padding="5" />
+                            </Border>
+                            <Border Width="250"
+                                    Height="30"
+                                    BorderBrush="Black"
+                                    BorderThickness="0, 0, 1, 1">
+                                <TextBlock Text="{Binding TimeValue}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Padding="5" />
+                            </Border>
+                        </StackPanel>
+                        <Border Width="250"
+                                BorderBrush="Black"
+                                BorderThickness="0, 0, 1, 0">
+                            <ListBox ItemsSource="{Binding PathsVertices}"
+                                     BorderThickness="0"/>
+                        </Border>
+                    </DockPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <d:DockPanel DockPanel.Dock="Left">
+                <StackPanel DockPanel.Dock="Top">
+                    <Border Width="250"
+                            Height="50"
+                            BorderBrush="Black"
+                            BorderThickness="0, 0, 1, 1">
+                        <TextBlock Text="Ыылвацу"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Padding="5" />
+                    </Border>
+                    <Border Width="250"
+                            Height="30"
+                            BorderBrush="Black"
+                            BorderThickness="0, 0, 1, 1">
+                        <TextBlock Text="100"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Padding="5" />
+                    </Border>
+                    <Border Width="250"
+                            Height="30"
+                            BorderBrush="Black"
+                            BorderThickness="0, 0, 0, 1">
+                        <TextBlock Text="0.00124"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Padding="5" />
+                    </Border>
+                </StackPanel>
+                <Border Width="250"
+                        BorderBrush="Black"
+                        BorderThickness="0, 0, 1, 1">
+                    <ListBox BorderThickness="0">
+                        <ListBoxItem Content=" 1 ->  2: 1,4,2" />
+                        <ListBoxItem Content=" 3 ->  2: 3,1,4,2" />
+                        <ListBoxItem Content=" 2 ->  3: 2,4,1,5,3" />
+                    </ListBox>
+                </Border>
+            </d:DockPanel>
+        </ItemsControl>
+    </DockPanel>
+</Window>

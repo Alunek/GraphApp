@@ -1,0 +1,113 @@
+﻿<Window x:Class="GraphApp.WPF.Views.Windows.GraphAppWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:control="clr-namespace:GraphApp.WPF.Views.Controls"
+        xmlns:vm="clr-namespace:GraphApp.WPF.ViewModels.Windows"
+        mc:Ignorable="d"
+        Title="Обработка информации в вычислительных системах" Height="600" Width="950"
+        d:DataContext="{d:DesignInstance vm:GraphAppWindowViewModel}">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top"
+                  Height="20">
+                <MenuItem Header="Файл">
+                    <MenuItem Header="Открыть" Click="OpenClickHandler" />
+                    <MenuItem Header="Сохранить как" Click="SaveClickHandler" />
+                    <Separator />
+                    <MenuItem Header="Выход" Click="ExitClickHandler" />
+                </MenuItem>
+            </Menu>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="440" />
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="LeftGridControl"
+                      Grid.Column="0">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Bottom"
+                                        Orientation="Horizontal"
+                                        Background="WhiteSmoke">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Margin="5, 5"
+                                       VerticalAlignment="Center"
+                                       Text="Алгоритм маршрутизации" />
+
+                            </StackPanel>
+                            <ComboBox Margin="0, 5"
+                                      ItemsSource="{Binding RoutingAlgorithmsCollection}"
+                                      SelectedValue="{Binding SelectedRoutingAlgorithm}"
+                                      Width="150"
+                                      MaxDropDownHeight="150">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Margin="10, 5, 0, 5"
+                                    Content="Показать"
+                                    Command="{Binding ___Command}" />
+                        </StackPanel>
+                        <StackPanel DockPanel.Dock="Bottom"
+                                        Orientation="Horizontal"
+                                        Background="WhiteSmoke">
+                            <TextBlock Margin="5, 5"
+                                       VerticalAlignment="Center"
+                                       Text="Алгоритм поиска пути" />
+                            <ComboBox Margin="22, 5, 0, 5"
+                                      ItemsSource="{Binding GraphAlgorithmsCollection}"
+                                      SelectedValue="{Binding SelectedGraphAlgorithm}"
+                                      Width="150"
+                                      MaxDropDownHeight="150">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Margin="10, 5, 0, 5"
+                                    Content="Найти путь"
+                                    Command="{Binding FindPathBetweenPairVertexesCommand}" />
+                            <Button Margin="5, 5"
+                                    Content="Сравнить"
+                                    Command="{Binding CompareGraphAlgorithmCommand}" />
+                        </StackPanel>
+                        <control:GraphControlView x:Name="GraphControl"
+                                                  DataContext="{Binding GraphViewModel}" />
+                    </DockPanel>
+                </Grid>
+                <GridSplitter Grid.Column="1"
+                              Width="3"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Stretch" />
+                <Grid x:Name="RightGridControl"
+                      Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    <control:MatrixPageControlView x:Name="MatrixPageControl"
+                                                   Grid.Row="0"
+                                                        DataContext="{Binding MatrixPageViewModel}" />
+                    <GridSplitter Grid.Row="1"
+                              Height="3"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Center" />
+                    <Grid Grid.Row="2">
+                        <ListBox/>
+                        <StatusBar VerticalAlignment="Bottom"
+                               Height="25">
+                            <TextBlock Text="{Binding FoundPathString}"
+                                   VerticalAlignment="Center"/>
+                        </StatusBar>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</Window>
